@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
-    <title>Spisok vakansij</title>
+    <title>Sozdanie vakansii</title>
 </head>
 <body>
 <div class="container-fluid p-0">
@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="/">Glavnaja</a>
-                    <a class="nav-item nav-link active" th:href="@{/vacancies}">Vakansii</a>
+                    <a class="nav-item nav-link" th:href="@{/vacancies}">Vakansii</a>
                     <a class="nav-item nav-link" th:href="@{/candidates}">Kandidaty</a>
                     <a class="nav-item nav-link active" th:href="@{/vacancies/create}">Sozdat' vakansiju</a>
                 </div>
@@ -27,24 +27,26 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Imja</th>
-                    <th scope="col">Data sozdanija</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="vacancy: ${vacancies}">
-                    <td th:text="${vacancy.id}" />
-                    <td th:text="${vacancy.title}" />
-                    <td th:text="${vacancy.creationDate}"/>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <form class="mt-3">
+            <div class="mb-3">
+                <label for="title" class="form-label"><b>Nazvanie</b></label>
+                <input type="text" class="form-control" id="title" placeholder="Predlagaja dolzhnost', naprimer, Vedushhij Java razrabotchik">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label"><b>Opisanie</b></label>
+                <textarea class="form-control" id="description" rows="25" placeholder="Opishite trebovanija k kandidatu"></textarea>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/vacancies}">Otmena</a></div>
+                        <div class="col-6"><ink active" th:href="@{/ class="btn btn-primary w-100" type="submit">Sohranit'</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 </body>
