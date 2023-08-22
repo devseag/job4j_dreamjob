@@ -20,13 +20,22 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
+//    public MemoryVacancyRepository() {
+//        save(new Vacancy(0, "Intern Java Developer", "test", LocalDateTime.now()));
+//        save(new Vacancy(0, "Junior Java Developer", "test", LocalDateTime.now()));
+//        save(new Vacancy(0, "Junior+ Java Developer", "test+", LocalDateTime.now()));
+//        save(new Vacancy(0, "Middle Java Developer", "test", LocalDateTime.now()));
+//        save(new Vacancy(0, "Middle+ Java Developer", "test+", LocalDateTime.now()));
+//        save(new Vacancy(0, "Senior Java Developer", "test", LocalDateTime.now()));
+//    }
+
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "test", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior Java Developer", "test", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior+ Java Developer", "test+", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle Java Developer", "test", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle+ Java Developer", "test+", LocalDateTime.now()));
-        save(new Vacancy(0, "Senior Java Developer", "test", LocalDateTime.now()));
+        save(new Vacancy(0, "Intern Java Developer", "Stazher Java razrabotchik", LocalDateTime.now(), true, 1, 0));
+        save(new Vacancy(0, "Junior Java Developer", "Mladshij Java razrabotchik", LocalDateTime.now(), true, 1, 0));
+        save(new Vacancy(0, "Junior+ Java Developer", "Java razrabotchik", LocalDateTime.now(), true, 2, 0));
+        save(new Vacancy(0, "Middle Java Developer", "Starshij Java razrabotchik", LocalDateTime.now(), true, 2, 0));
+        save(new Vacancy(0, "Middle+ Java Developer", "Vedushhij Java razrabotchik", LocalDateTime.now(), true, 2, 0));
+        save(new Vacancy(0, "Senior Java Developer", "Glavnyj Java razrabotchik", LocalDateTime.now(), true, 3, 0));
     }
 
 //    public static MemoryVacancyRepository getInstance() {
@@ -49,7 +58,9 @@ public class MemoryVacancyRepository implements VacancyRepository {
     public boolean update(Vacancy vacancy) {
 //        return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate())) != null;
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> {
-            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId()
+            return new Vacancy(
+                    oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(),
+                    vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId(), vacancy.getFileId()
             );
         }) != null;
     }

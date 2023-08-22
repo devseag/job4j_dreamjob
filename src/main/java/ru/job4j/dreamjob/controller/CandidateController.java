@@ -4,7 +4,10 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.job4j.dreamjob.dto.FileDto;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.Vacancy;
 import ru.job4j.dreamjob.repository.CandidateRepository;
 import ru.job4j.dreamjob.repository.MemoryCandidateRepository;
 import ru.job4j.dreamjob.service.CandidateService;
@@ -39,6 +42,29 @@ public class CandidateController {
         return "candidates/create";
     }
 
+    @PostMapping("/create")
+    public String create(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
+        try {
+            candidateService.save(candidate, new FileDto(file.getOriginalFilename(), file.getBytes()));
+            return "redirect:/candidates";
+        } catch (Exception exception) {
+            model.addAttribute("message", exception.getMessage());
+            return "errors/404";
+        }
+    }
+
+//    @GetMapping("/{id}")
+//    public String getById(Model model, @PathVariable int id) {
+//        var candidateOptional = candidateService.findById(id);
+//        if (candidateOptional.isEmpty()) {
+//            model.addAttribute("message", "Resume s ukazannym identifikatorom ne najdena");
+//            return "errors/404";
+//        }
+//        model.addAttribute("cities", cityService.findAll());
+//        model.addAttribute("candidate", candidateOptional.get());
+//        return "candidates/one";
+//    }
+
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
         var candidateOptional = candidateService.findById(id);
@@ -51,14 +77,29 @@ public class CandidateController {
         return "candidates/one";
     }
 
+//    @PostMapping("/update")
+//    public String update(@ModelAttribute Candidate candidate, Model model) {
+//        var isUpdated = candidateService.update(candidate);
+//        if (!isUpdated) {
+//            model.addAttribute("message", "Resume s ukazannym identifikatorom ne najdena");
+//            return "errors/404";
+//        }
+//        return "redirect:/candidates";
+//    }
+
     @PostMapping("/update")
-    public String update(@ModelAttribute Candidate candidate, Model model) {
-        var isUpdated = candidateService.update(candidate);
-        if (!isUpdated) {
-            model.addAttribute("message", "Resume s ukazannym identifikatorom ne najdena");
+    public String update(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
+        try {
+            var isUpdated = candidateService.update(candidate, new FileDto(file.getOriginalFilename(), file.getBytes()));
+            if (!isUpdated) {
+                model.addAttribute("message", "Vakansija s ukazannym identifikatorom ne najdena");
+                return "errors/404";
+            }
+            return "redirect:/candidates";
+        } catch (Exception exception) {
+            model.addAttribute("message", exception.getMessage());
             return "errors/404";
         }
-        return "redirect:/candidates";
     }
 
     @GetMapping("/delete/{id}")

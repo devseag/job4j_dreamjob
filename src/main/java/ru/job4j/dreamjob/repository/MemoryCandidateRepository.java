@@ -21,10 +21,16 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
+//    public MemoryCandidateRepository() {
+//        save(new Candidate(0, "John", "Learning java for 1 month", LocalDateTime.now()));
+//        save(new Candidate(0, "Bill", "Learning java for 6 months", LocalDateTime.now()));
+//        save(new Candidate(0, "Sally", "Learning java for 1 year", LocalDateTime.now()));
+//    }
+
     public MemoryCandidateRepository() {
-        save(new Candidate(0, "John", "Learning java for 1 month", LocalDateTime.now()));
-        save(new Candidate(0, "Bill", "Learning java for 6 months", LocalDateTime.now()));
-        save(new Candidate(0, "Sally", "Learning java for 1 year", LocalDateTime.now()));
+        save(new Candidate(0, "John", "Learning java for 1 month", LocalDateTime.now(), 3, 0));
+        save(new Candidate(0, "Bill", "Learning java for 6 months", LocalDateTime.now(), 2, 0));
+        save(new Candidate(0, "Sally", "Learning java for 1 year", LocalDateTime.now(), 1, 0));
     }
 
 //    public static MemoryCandidateRepository getInstance() {
@@ -47,7 +53,9 @@ public class MemoryCandidateRepository implements CandidateRepository {
     public boolean update(Candidate candidate) {
 //        return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) -> new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(), candidate.getCreationDate())) != null;
         return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) -> {
-            return new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(), candidate.getCreationDate(), candidate.getCityId()
+            return new Candidate(
+                    oldCandidate.getId(), candidate.getName(), candidate.getDescription(),
+                    candidate.getCreationDate(), candidate.getCityId(), candidate.getFileId()
             );
         }) != null;
     }
