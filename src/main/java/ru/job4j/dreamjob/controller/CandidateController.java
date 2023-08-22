@@ -13,7 +13,13 @@ import ru.job4j.dreamjob.service.SimpleCandidateService;
 @RequestMapping("/candidates")
 public class CandidateController {
 
-    private final CandidateService candidateService = SimpleCandidateService.getInstance();
+    private final CandidateService candidateService;
+
+    public CandidateController(CandidateService candidateService) {
+        this.candidateService = candidateService;
+    }
+
+//    private final CandidateService candidateService = SimpleCandidateService.getInstance();
 
     @GetMapping
     public String getAll(Model model) {

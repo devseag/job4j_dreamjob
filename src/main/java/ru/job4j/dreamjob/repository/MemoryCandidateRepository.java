@@ -13,21 +13,21 @@ import java.util.Optional;
 @Repository
 public class MemoryCandidateRepository implements CandidateRepository {
 
-    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
+//    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
 
     private int nextId = 1;
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
-    private MemoryCandidateRepository() {
+    public MemoryCandidateRepository() {
         save(new Candidate(0, "John", "Learning java for 1 month", LocalDateTime.now()));
         save(new Candidate(0, "Bill", "Learning java for 6 months", LocalDateTime.now()));
         save(new Candidate(0, "Sally", "Learning java for 1 year", LocalDateTime.now()));
     }
 
-    public static MemoryCandidateRepository getInstance() {
-        return INSTANCE;
-    }
+//    public static MemoryCandidateRepository getInstance() {
+//        return INSTANCE;
+//    }
 
     @Override
     public Candidate save(Candidate candidate) {

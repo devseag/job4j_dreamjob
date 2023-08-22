@@ -3,21 +3,28 @@ package ru.job4j.dreamjob.service;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.repository.CandidateRepository;
 import ru.job4j.dreamjob.repository.MemoryCandidateRepository;
+import ru.job4j.dreamjob.repository.VacancyRepository;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public class SimpleCandidateService implements CandidateService {
 
-    private static final SimpleCandidateService INSTANCE = new SimpleCandidateService();
+//    private static final SimpleCandidateService INSTANCE = new SimpleCandidateService();
+//
+//    private final CandidateRepository candidateRepository = MemoryCandidateRepository.getInstance();
 
-    private final CandidateRepository candidateRepository = MemoryCandidateRepository.getInstance();
+    private final CandidateRepository candidateRepository;
 
-    private SimpleCandidateService() { }
-
-    public static SimpleCandidateService getInstance() {
-        return INSTANCE;
+    public SimpleCandidateService(CandidateRepository candidateRepository) {
+        this.candidateRepository = candidateRepository;
     }
+
+//    private SimpleCandidateService() { }
+
+//    public static SimpleCandidateService getInstance() {
+//        return INSTANCE;
+//    }
 
     @Override
     public Candidate save(Candidate candidate) {
