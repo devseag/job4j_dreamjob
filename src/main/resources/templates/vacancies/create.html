@@ -27,21 +27,21 @@
         </div>
     </nav>
     <div class="container">
-        <form class="mt-3">
+        <form class="mt-3" th:action="@{/vacancies/create}" method="post">
             <div class="mb-3">
                 <label for="title" class="form-label"><b>Nazvanie</b></label>
-                <input type="text" class="form-control" id="title" placeholder="Predlagaja dolzhnost', naprimer, Vedushhij Java razrabotchik">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Predlagaja dolzhnost', naprimer, Vedushhij Java razrabotchik">
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label"><b>Opisanie</b></label>
-                <textarea class="form-control" id="description" rows="25" placeholder="Opishite trebovanija k kandidatu"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="25" placeholder="Opishite trebovanija k kandidatu"></textarea>
             </div>
             <div class="mb-3 row">
                 <div class="col-6"></div>
                 <div class="col-6">
                     <div class="row">
                         <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/vacancies}">Otmena</a></div>
-                        <div class="col-6"><button class="btn btn-primary w-100" type="submit">Sohranit</button>
+                        <div class="col-6"><button class="btn btn-primary w-100" type="submit">Sohranit'</button>
                         </div>
                     </div>
                 </div>
