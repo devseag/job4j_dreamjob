@@ -8,13 +8,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class MemoryVacancyRepository implements VacancyRepository {
 
 //    private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
 
-    private int nextId = 1;
+    //    private int nextId = 1;
+    private final AtomicInteger nextId = new AtomicInteger(1);
 
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
@@ -33,7 +35,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     @Override
     public Vacancy save(Vacancy vacancy) {
-        vacancy.setId(nextId++);
+        vacancy.setId(nextId.getAndIncrement());
         vacancies.put(vacancy.getId(), vacancy);
         return vacancy;
     }
