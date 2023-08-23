@@ -12,7 +12,7 @@ public interface CandidateService {
 
     boolean deleteById(int id);
 
-    boolean update(Candidate Candidate, FileDto image);
+    boolean update(Candidate candidate, FileDto image);
 
     Optional<Candidate> findById(int id);
 
